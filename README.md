@@ -40,7 +40,7 @@ analytic formulas for known shapes, and the output loads and simulates correctly
 ## Install
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/step2urdf.git
+git clone https://github.com/edsamsankey/step2urdf.git
 cd step2urdf
 python -m venv venv
 ```
