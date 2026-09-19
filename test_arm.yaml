@@ -1,0 +1,40 @@
+# Example config for examples/test_arm.step
+robot_name: test_arm
+density: 2700          # kg/m^3 default (aluminium)
+mesh_path: package     # or "relative" for PyBullet / MuJoCo
+collision: mesh
+root: base_link
+links:
+  - name: base_link
+    parts: [Base, "M8_Screw*"]      # glob: both screw instances ride on the base
+  - name: upper_arm
+    parts: [UpperArm]
+  - name: forearm
+    parts: [Forearm]
+    density: 7850                   # steel
+  - name: gripper
+    parts: [Gripper]
+    mass: 0.25                      # override: measured mass in kg
+joints:
+  - name: shoulder_yaw
+    type: revolute
+    parent: base_link
+    child: upper_arm
+    origin: auto                    # detected from the turret boss
+    axis: auto
+    lower: -3.14
+    upper: 3.14
+  - name: elbow_pitch
+    type: revolute
+    parent: upper_arm
+    child: forearm
+    origin: auto                    # detected from the pin on the upper arm
+    axis: [0, 1, 0]
+    lower: -1.57
+    upper: 1.57
+    effort: 20
+  - name: wrist_mount
+    type: fixed
+    parent: forearm
+    child: gripper
+    origin: [135, 0, 275]           # explicit point in CAD mm

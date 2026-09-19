@@ -1,0 +1,216 @@
+# step2urdf config for a 12-DOF quadruped (4 legs x 3 MG996R servos)
+# Load this in the app sidebar: "Load a saved config (.yaml)" -> Apply config
+#
+# Joint naming per leg:  <leg>_abduction  hip sideways swing (roll)
+#                        <leg>_thigh      upper leg forward/back (pitch)
+#                        <leg>_knee       lower leg bend
+# Limits are radians. Effort 1.0 N*m and velocity 5.2 rad/s are MG996R stall
+# torque and no-load speed at 6V - adjust if you run 5V or 7.4V.
+# density 1240 = solid PLA. Printed parts with infill are lighter; see notes.
+robot_name: quadruped
+density: 1240
+mesh_path: relative
+collision: box
+root: base_link
+links:
+- name: base_link
+  parts:
+  - basechassis_v1
+  - mg996r_1
+  - mg996r_4
+  - mg996r_7
+  - mg996r_10
+- name: leg1_hip
+  parts:
+  - p_6mm_Bearing_SKF_626_RS_286_7833_step_1
+  - servo_bracket_v2_1
+  - servo_bracket_v2_outer_1
+  - attachmentCircular_1
+  - mg996r_2
+  - mg996r_3
+  - spacer_1
+- name: leg1_upper
+  parts:
+  - leg_upper_v2_v1_1
+  - servo_horn_v1_1_1
+  - link_rod_v2_v1_1
+  - p_6mm_Bearing_SKF_626_RS_286_7833_step_v1_1
+- name: leg1_lower
+  parts:
+  - leg_lower_v1_1
+- name: leg2_hip
+  parts:
+  - p_6mm_Bearing_SKF_626_RS_286_7833_step_2
+  - servo_bracket_v2_2
+  - servo_bracket_v2_outer_2
+  - attachmentCircular_2
+  - mg996r_5
+  - mg996r_6
+  - spacer_2
+- name: leg2_upper
+  parts:
+  - leg_upper_v2_v1_2
+  - servo_horn_v1_2
+  - servo_horn_v1_1_2
+  - link_rod_v2_v1_2
+  - p_6mm_Bearing_SKF_626_RS_286_7833_step_v1_2
+- name: leg2_lower
+  parts:
+  - leg_lower_v1_2
+- name: leg3_hip
+  parts:
+  - p_6mm_Bearing_SKF_626_RS_286_7833_step_3
+  - servo_bracket_v2_mirrored_1
+  - servo_bracket_v2_outer_mirrored_1
+  - attachmentCircular_3
+  - mg996r_8
+  - mg996r_9
+  - spacer_mirrored_1
+- name: leg3_upper
+  parts:
+  - leg_upper_v2_1
+  - servo_horn_1
+  - link_rod_v2_1
+  - p_6mm_Bearing_SKF_626_RS_286_7833_step_4
+- name: leg3_lower
+  parts:
+  - leg_lower_1
+- name: leg4_hip
+  parts:
+  - p_6mm_Bearing_SKF_626_RS_286_7833_step_5
+  - servo_bracket_v2_mirrored_2
+  - servo_bracket_v2_outer_mirrored_2
+  - attachmentCircular_4
+  - mg996r_11
+  - mg996r_12
+  - spacer_mirrored_2
+- name: leg4_upper
+  parts:
+  - leg_upper_v2_2
+  - servo_horn_2
+  - link_rod_v2_2
+  - p_6mm_Bearing_SKF_626_RS_286_7833_step_6
+- name: leg4_lower
+  parts:
+  - leg_lower_2
+joints:
+- name: leg1_abduction
+  type: revolute
+  parent: base_link
+  child: leg1_hip
+  origin: auto
+  axis: auto
+  lower: -0.7
+  upper: 0.7
+  effort: 1.0
+  velocity: 5.2
+- name: leg1_thigh
+  type: revolute
+  parent: leg1_hip
+  child: leg1_upper
+  origin: auto
+  axis: auto
+  lower: -1.6
+  upper: 1.6
+  effort: 1.0
+  velocity: 5.2
+- name: leg1_knee
+  type: revolute
+  parent: leg1_upper
+  child: leg1_lower
+  origin: auto
+  axis: auto
+  lower: -0.2
+  upper: 2.4
+  effort: 1.0
+  velocity: 5.2
+- name: leg2_abduction
+  type: revolute
+  parent: base_link
+  child: leg2_hip
+  origin: auto
+  axis: auto
+  lower: -0.7
+  upper: 0.7
+  effort: 1.0
+  velocity: 5.2
+- name: leg2_thigh
+  type: revolute
+  parent: leg2_hip
+  child: leg2_upper
+  origin: auto
+  axis: auto
+  lower: -1.6
+  upper: 1.6
+  effort: 1.0
+  velocity: 5.2
+- name: leg2_knee
+  type: revolute
+  parent: leg2_upper
+  child: leg2_lower
+  origin: auto
+  axis: auto
+  lower: -0.2
+  upper: 2.4
+  effort: 1.0
+  velocity: 5.2
+- name: leg3_abduction
+  type: revolute
+  parent: base_link
+  child: leg3_hip
+  origin: auto
+  axis: auto
+  lower: -0.7
+  upper: 0.7
+  effort: 1.0
+  velocity: 5.2
+- name: leg3_thigh
+  type: revolute
+  parent: leg3_hip
+  child: leg3_upper
+  origin: auto
+  axis: auto
+  lower: -1.6
+  upper: 1.6
+  effort: 1.0
+  velocity: 5.2
+- name: leg3_knee
+  type: revolute
+  parent: leg3_upper
+  child: leg3_lower
+  origin: auto
+  axis: auto
+  lower: -0.2
+  upper: 2.4
+  effort: 1.0
+  velocity: 5.2
+- name: leg4_abduction
+  type: revolute
+  parent: base_link
+  child: leg4_hip
+  origin: auto
+  axis: auto
+  lower: -0.7
+  upper: 0.7
+  effort: 1.0
+  velocity: 5.2
+- name: leg4_thigh
+  type: revolute
+  parent: leg4_hip
+  child: leg4_upper
+  origin: auto
+  axis: auto
+  lower: -1.6
+  upper: 1.6
+  effort: 1.0
+  velocity: 5.2
+- name: leg4_knee
+  type: revolute
+  parent: leg4_upper
+  child: leg4_lower
+  origin: auto
+  axis: auto
+  lower: -0.2
+  upper: 2.4
+  effort: 1.0
+  velocity: 5.2
