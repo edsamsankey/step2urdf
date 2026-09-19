@@ -1,0 +1,7 @@
+# The CAD kernel. "novtk" is the same OpenCascade without the VTK graphics library,
+# so it is a smaller download. Needs Python 3.9-3.13 (NOT 3.14 yet).
+cadquery-ocp-novtk>=7.7 ; python_version < "3.14"
+numpy
+pyyaml
+streamlit>=1.30       # web app only
+pandas                # web app only

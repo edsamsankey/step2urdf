@@ -1,0 +1,24 @@
+Windows setup, step by step
+===========================
+
+1. Check your Python version:      python --version
+   You need 3.12 or 3.13. Python 3.14 will NOT work: the OpenCascade CAD
+   kernel has no build for it yet. Get 3.12 from python.org/downloads,
+   and tick "Add python.exe to PATH" in the installer.
+
+2. Open PowerShell IN the step2urdf folder. Easiest way: open the folder in
+   File Explorer, click the address bar, type  powershell  and press Enter.
+   Run  dir  and check you can see app.py and requirements.txt.
+
+3. Create the environment (use py -3.12 if 3.14 is also installed):
+       py -3.12 -m venv venv
+
+4. Install. No "activate" needed, so PowerShell won't block anything:
+       venv\Scripts\python.exe -m pip install -r requirements.txt
+
+5. Run:
+       venv\Scripts\python.exe -m streamlit run app.py
+
+   Your browser opens at http://localhost:8501. Ctrl+C stops it.
+
+Next time, only steps 2 and 5. Or just double-click run_windows.bat.
